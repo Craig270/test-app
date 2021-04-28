@@ -11,22 +11,23 @@ export default class Post extends React.Component {
     this.state = {
       comments: props.comments,
       content: props.content,
+      count: 0,
     };
   }
 
   render() {
-    let comments = [];
+    let comments;
     if (this.state.comments) {
-      for (let comment of this.state.comments) {
-        comment.push(<Comment {...comment} />);
-      }
+      comments = this.state.comments.map((comment, index) => (
+        <Comment key={index} {...comment} />
+      ));
     }
     return (
       <div className="card w-75">
         <div className="card-header bg-primary text-white">
           Username and time
         </div>
-        <div className="card-body">This is where our content goes</div>
+        <div className="card-body">{this.state.content}</div>
         <div className="card-footer">
           <LikeButton />
           <ReplyButton />
